@@ -1,0 +1,18 @@
+    {
+      "name": "fr.cgi~todoapp~0.1-SNAPSHOT",
+      "config": {
+        "main" : "fr.cgi.todoapp.Todoapp",
+        "port" : 8130,
+        "app-name" : "Todoapp",
+    	"app-address" : "/todoapp",
+    	"app-icon" : "Todoapp-large",
+        "host": "${host}",
+        "ssl" : $ssl,
+        "auto-redeploy": false,
+        "userbook-host": "${host}",
+        "integration-mode" : "HTTP",
+        "app-registry.port" : 8012,
+        "mode" : "${mode}",
+        "entcore.port" : 8009
+      }
+    }
