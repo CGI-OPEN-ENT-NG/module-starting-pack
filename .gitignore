@@ -24,3 +24,4 @@ module-starting-pack/src/main/resources/public/font
 /gradlew
 /gradlew.bat
 /src/main/resources/public/dist/
+/gradle/
