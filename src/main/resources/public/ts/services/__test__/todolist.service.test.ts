@@ -13,4 +13,11 @@ describe('TodolistService', () => {
         });
     });
 
+    it('returns data when retrieve request is correctly called other method', done => {
+        let spy = jest.spyOn(axios, "get");
+        todolistService.test().then(response => {
+            expect(spy).toHaveBeenCalledWith("/todoapp/test/ok");
+            done();
+        });
+    });
 });

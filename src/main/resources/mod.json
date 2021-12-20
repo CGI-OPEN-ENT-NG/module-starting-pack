@@ -1,5 +1,5 @@
 {
-	"main" : "fr.openent.todoapp.Todoapp",
+	"main" : "fr.cgi.todoapp.Todoapp",
 	"port" : 8130,
 	"app-name" : "Todoapp",
 	"app-address" : "/todoapp",

@@ -1,0 +1,10 @@
+<div ng-controller="TodolistController as vm">
+    <div>Second page 2</div>
+    <span>[[vm.text]]</span>
+
+    <!-- not accessible via mainController then this won't work (unless vm.userId is initialized from todolist Controller -->
+    <span>[[vm.userId]]</span>
+
+    <!-- can be accessible via mainController if using $scope.userId or $scope.$parent depending on template html inherent -->
+    <span>[[userId]]</span>
+</div>

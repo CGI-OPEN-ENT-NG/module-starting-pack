@@ -25,3 +25,7 @@ module-starting-pack/src/main/resources/public/font
 /gradlew.bat
 /src/main/resources/public/dist/
 /gradle/
+/src/main/resources/public/template/entcore/*
+/src/main/resources/public/template/entcore/
+/src/main/resources/public/js/
+/src/main/resources/view/

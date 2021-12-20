@@ -18,8 +18,8 @@ export const test = ng.directive('sessionToProgressionForm', function () {
         controllerAs: 'vm',
         bindToController: true,
         replace: false,
-        controller: function () {
-            const vm: IViewModel = <IViewModel>this;
+        controller: function ($scope) {
+            const vm: IViewModel = <IViewModel>this; // ou $scope.vm en fonction de votre init
 
             vm.$onInit = async () => {
 
