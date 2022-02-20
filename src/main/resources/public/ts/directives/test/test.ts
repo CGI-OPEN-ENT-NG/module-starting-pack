@@ -1,36 +1,60 @@
-import {ng} from 'entcore';
+import {ng} from "entcore";
 import {RootsConst} from "../../core/constants/roots.const";
+import {ILocationService, IScope, IWindowService} from "angular";
 
 interface IViewModel {
-    $onInit(): any;
+    text: string;
 
-    $onDestroy(): any;
+    changeText(newText: string): void;
+    getText(): string;
 }
 
-export const test = ng.directive('sessionToProgressionForm', function () {
+class Controller implements ng.IController, IViewModel {
+    public test: string;
+    text: string;
+
+    constructor(private $scope: IScope,
+                private $location:ILocationService,
+                private $window: IWindowService
+                /*  inject service etc..just as we do in controller */)
+    {}
+
+    $onInit() {
+        this.test = "coucou";
+        console.log("I am built: ", this.$scope);
+    }
+
+    $onDestroy() {
+        console.log("I destroy testDirective");
+    }
+
+    changeText(newText: string): void {
+    }
+
+    getText(): string {
+        return "";
+    }
+
+}
+
+function directive() {
     return {
-        scope: {
-            session: '=',
-            homeworks: '='
-        },
         restrict: 'E',
         templateUrl: `${RootsConst.directive}test/test.html`,
+        scope: {
+            myProps: "="
+        },
         controllerAs: 'vm',
         bindToController: true,
-        replace: false,
-        controller: function ($scope) {
-            const vm: IViewModel = <IViewModel>this; // ou $scope.vm en fonction de votre init
-
-            vm.$onInit = async () => {
-
-            };
-        },
-
-        link: function ($scope) {
-            const vm: IViewModel = $scope.vm;
-
-            vm.$onDestroy = async () => {
-            };
+        controller: ['$scope','$location','$window', Controller],
+        /* interaction DOM/element */
+        link: function (scope: ng.IScope,
+                        element: ng.IAugmentedJQuery,
+                        attrs: ng.IAttributes,
+                        vm: ng.IController) {
+            console.log("link data: ", vm);
+            console.log("link scope: ", scope);
         }
-    };
-});
+    }
+}
+export const testDirective = ng.directive('testDirective', directive)

@@ -19,12 +19,13 @@ interface ViewModel {
 
 export const mainController = ng.controller('MainController', ['$scope', 'route', function ($scope, route) {
 	const vm: ViewModel = this;
+	console.log("thisMain: ", this);
 
 	// init life's cycle hook
 	vm.$onInit = () => {
 		vm.userId = window.myUserId;
 		$scope.userId = vm.userId;
-		console.log("MainController's life cycle");
+		console.log("MainController's life cycle: ", vm);
 	};
 
 	// destruction cycle hook
@@ -35,6 +36,9 @@ export const mainController = ng.controller('MainController', ['$scope', 'route'
 	route({
 		list: () => {
 			template.open('main', `second-page`);
+		},
+		list2: () => {
+			template.open('main', `third-page`);
 		},
 		defaultView: () => {
 			template.open('main', `main`);

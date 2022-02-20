@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<script src="/todoapp/public/dist/entcore/ng-app.js" type="text/javascript" id="context"></script>
 		<script src="/todoapp/public/dist/application.js" type="text/javascript"></script>
-		
+
 		<script type="text/ng-template" id="empty"></script>
 		<script>
 			// from controller renderView
@@ -17,6 +17,13 @@
 	<body ng-controller="MainController as vm" class="todoapp">
 		<portal>
 			<container template="main"></container>
+
+			<!-- usage of sniplet -->
+			<!-- <sniplet template="example" application="todoapp"></sniplet> -->
+
+			<!-- usage of directive -->
+			<!--  <test-directive my-props="'salut'"></test-directive>-->
+
 		</portal>
 	</body>
 

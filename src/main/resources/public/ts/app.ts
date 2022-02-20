@@ -21,6 +21,9 @@ routes.define(function($routeProvider){
 		.when('/list', {
 			action: 'list',
 		})
+		.when('/list2', {
+			action: 'list2',
+		})
 		// in your browser : default ${host}/${yourApp}
 		.otherwise({
 			action: 'defaultView'
