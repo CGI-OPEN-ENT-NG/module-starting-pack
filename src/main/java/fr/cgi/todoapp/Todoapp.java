@@ -1,5 +1,6 @@
 package fr.cgi.todoapp;
 
+import fr.cgi.todoapp.controller.ExerciceTodoController;
 import fr.cgi.todoapp.controller.TodoappController;
 import fr.cgi.todoapp.service.ServiceFactory;
 import fr.wseduc.mongodb.MongoDb;
@@ -25,6 +26,9 @@ public class Todoapp extends BaseServer {
 
 		// we add a controller (where API and other will be accessible from our client)
 		addController(new TodoappController(serviceFactory));
+
+		// scenario
+		addController(new ExerciceTodoController());
 	}
 
 }
