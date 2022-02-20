@@ -1,6 +1,6 @@
 import {ng} from 'entcore';
 
-interface ViewModel {
+export interface ViewModel {
     $onInit(): any;
     $onDestroy(): any;
 
