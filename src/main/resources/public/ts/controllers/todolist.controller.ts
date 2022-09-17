@@ -1,9 +1,7 @@
 import {ng} from 'entcore';
+import {IScope} from "angular";
 
-interface ViewModel {
-    $onInit(): any;
-    $onDestroy(): any;
-
+interface IViewModel extends ng.IController {
     changeText(newText: string): void;
 
     getText(): string;
@@ -11,28 +9,35 @@ interface ViewModel {
     text: string;
 }
 
-// we use function instead of arrow function to apply life's cycle hook
-export const todolistController = ng.controller('TodolistController', ['$scope', 'route', function ($scope, route) {
-    const vm: ViewModel = this;
+interface ITodolistScope extends IScope {
+    vm: IViewModel;
+}
 
-    // init life's cycle hook
-    vm.$onInit = () => {
-        vm.text = "test var";
-        console.log("todolistController's life cycle: ", vm);
-        console.log("vm parent (main): ", $scope.$parent.vm);
-    };
+class Controller implements IViewModel {
 
-    vm.changeText = (newText: string) => {
-        vm.text = newText;
+    text: string;
+
+    constructor(private $scope: ITodolistScope
+                /*  inject service etc..just as we do in controller */) {
+        this.$scope.vm = this;
     }
 
-    vm.getText = () => {
-        return vm.text;
+    $onInit() {
+        this.text = "test var";
+        console.log("vm parent (main): ", this.$scope.$parent['vm']);
     }
 
-    // destruction cycle hook
-    vm.$onDestroy = () => {
+    changeText(newText: string): void {
+        this.text = newText;
+    }
 
-    };
+    getText(): string {
+        return this.text;
+    }
 
-}]);
+    $onDestroy() {
+
+    }
+}
+
+export const todolistController = ng.controller('TodolistController', ['$scope', Controller]);

@@ -1,47 +1,43 @@
 import {ng, template} from 'entcore';
+import {IScope} from "angular";
 
 declare let window: any;
 
-interface ViewModel {
-	$onInit(): any;
-	$onDestroy(): any;
-
+interface IViewModel extends ng.IController {
 	userId: string;
 }
 
-/**
-	Wrapper controller
-	------------------
-	Main controller.
-**/
+interface IMainScope extends IScope {
+	vm: IViewModel;
+}
 
-// we use function instead of arrow function to apply life's cycle hook
+class Controller implements IViewModel {
 
-export const mainController = ng.controller('MainController', ['$scope', 'route', function ($scope, route) {
-	const vm: ViewModel = this;
-	console.log("thisMain: ", this);
+	userId: string;
 
-	// init life's cycle hook
-	vm.$onInit = () => {
-		vm.userId = window.myUserId;
-		$scope.userId = vm.userId;
-		console.log("MainController's life cycle: ", vm);
-	};
+	constructor(private $scope: IMainScope,
+				private route: any,
+				/*  inject service etc..just as we do in controller */) {
+		this.$scope.vm = this;
+	}
 
-	// destruction cycle hook
-	vm.$onDestroy = () => {
+	$onInit() {
+		this.route({
+			list: () => {
+				template.open('main', `second-page`);
+			},
+			list2: () => {
+				template.open('main', `third-page`);
+			},
+			defaultView: () => {
+				template.open('main', `main`);
+			}
+		});
+	}
 
-	};
+	$onDestroy() {
 
-	route({
-		list: () => {
-			template.open('main', `second-page`);
-		},
-		list2: () => {
-			template.open('main', `third-page`);
-		},
-		defaultView: () => {
-			template.open('main', `main`);
-		}
-	});
-}]);
+	}
+}
+
+export const mainController = ng.controller('MainController', ['$scope', 'route', Controller]);
