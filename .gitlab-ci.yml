@@ -5,7 +5,7 @@ stages:
 # npm install & compile using gulp
 buildNode:
   stage: build
-  image: opendigitaleducation/node
+  image: opendigitaleducation/node:10-alpine
   script:
     - npm install
     - node_modules/gulp/bin/gulp.js build
