@@ -2,16 +2,24 @@ import {ng} from "entcore";
 import {RootsConst} from "../../core/constants/roots.const";
 import {ILocationService, IScope, IWindowService} from "angular";
 
-interface IViewModel extends ng.IController {
+interface IViewModel extends ng.IController, ICardProfileProps {
     text: string;
 
     changeText(newText: string): void;
     getText(): string;
 }
 
+interface ICardProfileProps {
+    name: string,
+    job: string
+}
+
 class Controller implements IViewModel {
-    public test: string;
-    text: string;
+    private test: string;
+
+    public text: string;
+    public name: string;
+    public job: string;
 
     constructor(private $scope: IScope,
                 private $location:ILocationService,
@@ -40,8 +48,10 @@ class Controller implements IViewModel {
 function directive() {
     return {
         restrict: 'E',
-        templateUrl: `${RootsConst.directive}test/test.html`,
+        templateUrl: `${RootsConst.directive}card-profile/card-profile.directive.html`,
         scope: {
+            name: "=",
+            job: "="
         },
         controllerAs: 'vm',
         bindToController: true,
@@ -54,4 +64,4 @@ function directive() {
         }
     }
 }
-export const testDirective = ng.directive('testDirective', directive)
+export const cardProfile = ng.directive('cardProfile', directive)
