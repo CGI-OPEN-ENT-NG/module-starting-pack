@@ -7,6 +7,8 @@ interface IViewModel extends ng.IController, ICardProfileProps {
 
     changeText(newText: string): void;
     getText(): string;
+
+    onClickActionNotify(value: string): void;
 }
 
 interface ICardProfileProps {
@@ -37,6 +39,10 @@ class Controller implements IViewModel {
     }
 
     changeText(newText: string): void {
+    }
+
+    onClickActionNotify(value: string): void {
+        console.log("as a parent, im receiving: ", value);
     }
 
     getText(): string {
