@@ -19,86 +19,86 @@ import org.powermock.reflect.Whitebox;
 
 @RunWith(PowerMockRunner.class) //Using the PowerMock runner
 @PowerMockRunnerDelegate(VertxUnitRunner.class) //And the Vertx runner
-@PrepareForTest({PowerMockClass.class, PowerMockService.class}) //Prepare the static class you want to test
+@PrepareForTest({ExempleClassForMock.class, ExempleServiceForMock.class}) //Prepare the static class you want to test
 public class PowerMockClassTest {
 
     @Test
     public void testStaticMethod(TestContext ctx) {
-        PowerMockito.spy(PowerMockClass.class); //Mock the PowerMockClass class keeping its implementation
-        Assert.assertEquals(PowerMockClass.staticMethod(), "1");
+        PowerMockito.spy(ExempleClassForMock.class); //Mock the PowerMockClass class keeping its implementation
+        Assert.assertEquals(ExempleClassForMock.staticMethod(), "1");
         //Change the return of the static method
-        PowerMockito.when(PowerMockClass.staticMethod()).thenReturn("2");
-        Assert.assertEquals(PowerMockClass.staticMethod(), "2");
+        PowerMockito.when(ExempleClassForMock.staticMethod()).thenReturn("2");
+        Assert.assertEquals(ExempleClassForMock.staticMethod(), "2");
     }
 
     @Test
     public void testPrivateMethod(TestContext ctx) throws Exception {
-        PowerMockClass powerMockClass = PowerMockito.spy(new PowerMockClass()); //Mock an object of type PowerMockClass keeping its implementation
-        Assert.assertEquals(Whitebox.invokeMethod(powerMockClass, "privateMethod"), "1");
+        ExempleClassForMock exempleClassForMock = PowerMockito.spy(new ExempleClassForMock()); //Mock an object of type PowerMockClass keeping its implementation
+        Assert.assertEquals(Whitebox.invokeMethod(exempleClassForMock, "privateMethod"), "1");
         //Change the return of the private method
-        PowerMockito.when(powerMockClass, "privateMethod").thenReturn("2");
-        Assert.assertEquals(Whitebox.invokeMethod(powerMockClass, "privateMethod"), "2");
+        PowerMockito.when(exempleClassForMock, "privateMethod").thenReturn("2");
+        Assert.assertEquals(Whitebox.invokeMethod(exempleClassForMock, "privateMethod"), "2");
     }
 
     @Test
     public void testStaticPrivateMethod(TestContext ctx) throws Exception {
-        PowerMockito.spy(PowerMockClass.class);
-        Assert.assertEquals(Whitebox.invokeMethod(PowerMockClass.class, "staticPrivateMethod"), "1");
+        PowerMockito.spy(ExempleClassForMock.class);
+        Assert.assertEquals(Whitebox.invokeMethod(ExempleClassForMock.class, "staticPrivateMethod"), "1");
         //Change the return of the static private method
-        PowerMockito.doReturn("2").when(PowerMockClass.class, "staticPrivateMethod");
-        Assert.assertEquals(Whitebox.invokeMethod(PowerMockClass.class, "staticPrivateMethod"), "2");
+        PowerMockito.doReturn("2").when(ExempleClassForMock.class, "staticPrivateMethod");
+        Assert.assertEquals(Whitebox.invokeMethod(ExempleClassForMock.class, "staticPrivateMethod"), "2");
     }
 
     @Test
     public void testStaticPrivateField(TestContext ctx) {
-        PowerMockito.spy(PowerMockClass.class);
-        Assert.assertEquals(Whitebox.getInternalState(PowerMockClass.class, "staticPrivateField"), "1");
+        PowerMockito.spy(ExempleClassForMock.class);
+        Assert.assertEquals(Whitebox.getInternalState(ExempleClassForMock.class, "staticPrivateField"), "1");
         //Changes the return of the static private field
-        Whitebox.setInternalState(PowerMockClass.class, "staticPrivateField", "2");
-        Assert.assertEquals(Whitebox.getInternalState(PowerMockClass.class, "staticPrivateField"), "2");
+        Whitebox.setInternalState(ExempleClassForMock.class, "staticPrivateField", "2");
+        Assert.assertEquals(Whitebox.getInternalState(ExempleClassForMock.class, "staticPrivateField"), "2");
     }
 
     @Test
     public void testStaticPrivateFieldHasBeenChange(TestContext ctx) {
-        Assert.assertEquals(Whitebox.getInternalState(PowerMockClass.class, "staticPrivateField"), "2"); //Attention the modifications are applied during all the execution of the tests.
+        Assert.assertEquals(Whitebox.getInternalState(ExempleClassForMock.class, "staticPrivateField"), "2"); //Attention the modifications are applied during all the execution of the tests.
     }
 
     @Test
-    @PrepareForTest({PowerMockClass.class})
+    @PrepareForTest({ExempleClassForMock.class})
     //Allows to reset the modifications made in the previous methods. Adds a slow time, do not use on all methods without reason
     public void testGetStaticPrivateField(TestContext ctx) {
-        PowerMockClass powerMockClass = new PowerMockClass();
-        Assert.assertEquals(powerMockClass.getStaticPrivateField(), "1");
-        Whitebox.setInternalState(PowerMockClass.class, "staticPrivateField", "2");
-        Assert.assertEquals(powerMockClass.getStaticPrivateField(), "2");
+        ExempleClassForMock exempleClassForMock = new ExempleClassForMock();
+        Assert.assertEquals(exempleClassForMock.getStaticPrivateField(), "1");
+        Whitebox.setInternalState(ExempleClassForMock.class, "staticPrivateField", "2");
+        Assert.assertEquals(exempleClassForMock.getStaticPrivateField(), "2");
     }
 
     @Test
     public void testGetPrivateMethodInInteger(TestContext ctx) throws Exception {
-        PowerMockito.spy(PowerMockClass.class);
-        PowerMockClass powerMockClass = new PowerMockClass();
-        Assert.assertEquals(powerMockClass.getStaticPrivateMethodInInteger(), 1);
-        PowerMockito.doReturn("2").when(PowerMockClass.class, "staticPrivateMethod");
-        Assert.assertEquals(powerMockClass.getStaticPrivateMethodInInteger(), 2);
+        PowerMockito.spy(ExempleClassForMock.class);
+        ExempleClassForMock exempleClassForMock = new ExempleClassForMock();
+        Assert.assertEquals(exempleClassForMock.getStaticPrivateMethodInInteger(), 1);
+        PowerMockito.doReturn("2").when(ExempleClassForMock.class, "staticPrivateMethod");
+        Assert.assertEquals(exempleClassForMock.getStaticPrivateMethodInInteger(), 2);
     }
 
     @Test
     public void testCallService(TestContext ctx) throws Exception {
-        PowerMockClass powerMockClass = PowerMockito.spy(new PowerMockClass());
+        ExempleClassForMock exempleClassForMock = PowerMockito.spy(new ExempleClassForMock());
         JsonObject jsonObject = PowerMockito.spy(new JsonObject());
         PowerMockito.doReturn("").when(jsonObject).getString(Mockito.any());
 
-        PowerMockService powerMockService = PowerMockito.spy(new PowerMockService());
-        Whitebox.setInternalState(powerMockClass, "powerMockService", powerMockService);
-        PowerMockito.doReturn("1").when(powerMockService).service(Mockito.any());
-        ctx.assertEquals(powerMockClass.callService(jsonObject), "1");
+        ExempleServiceForMock exempleServiceForMock = PowerMockito.spy(new ExempleServiceForMock());
+        Whitebox.setInternalState(exempleClassForMock, "exempleServiceForMock", exempleServiceForMock);
+        PowerMockito.doReturn("1").when(exempleServiceForMock).service(Mockito.any());
+        ctx.assertEquals(exempleClassForMock.callService(jsonObject), "1");
     }
 
     @Test
     public void testHandler(TestContext ctx) throws Exception {
         Async async = ctx.async();
-        PowerMockClass powerMockClass = PowerMockito.spy(new PowerMockClass());
-        PowerMockService powerMockService = PowerMockito.spy(new PowerMockService());
+        ExempleClassForMock exempleClassForMock = PowerMockito.spy(new ExempleClassForMock());
+        ExempleServiceForMock exempleServiceForMock = PowerMockito.spy(new ExempleServiceForMock());
 
         //Allows you to change the way the service works
         PowerMockito.doAnswer((Answer<Void>) invocation -> {
@@ -106,21 +106,21 @@ public class PowerMockClassTest {
             //We return a set of test data in response from the service
             handler.handle(new Either.Right<>(new JsonObject().put("data", "myCustomData")));
             return null;
-        }).when(powerMockService).getSqlData(Mockito.any(), Mockito.any());
-        Whitebox.setInternalState(powerMockClass, "powerMockService", powerMockService);
+        }).when(exempleServiceForMock).getSqlData(Mockito.any(), Mockito.any());
+        Whitebox.setInternalState(exempleClassForMock, "exempleServiceForMock", exempleServiceForMock);
 
-        powerMockClass.methodHandler("idSqlData").onSuccess(event -> {
+        exempleClassForMock.methodHandler("idSqlData").onSuccess(event -> {
             ctx.assertTrue(event.equals("myCustomData"));
             async.complete();
         });
     }
 
     @Test
-    @PrepareForTest({PowerMockClass.class, PowerMockService.class})
+    @PrepareForTest({ExempleClassForMock.class, ExempleServiceForMock.class})
     public void testHandlerFromStaticService(TestContext ctx) throws Exception {
         Async async = ctx.async();
-        PowerMockClass powerMockClass = PowerMockito.spy(new PowerMockClass());
-        PowerMockito.spy(PowerMockService.class);
+        ExempleClassForMock exempleClassForMock = PowerMockito.spy(new ExempleClassForMock());
+        PowerMockito.spy(ExempleServiceForMock.class);
 
         //Allows you to change the way the service works
         PowerMockito.doAnswer((Answer<Void>) invocation -> {
@@ -129,9 +129,9 @@ public class PowerMockClassTest {
             handler.handle(new Either.Right<>(new JsonObject().put("data", "myCustomData")));
             return null;
             //For static void methods we must use this syntax
-        }).when(PowerMockService.class, "getSqlDataStatic", Mockito.any(), Mockito.any());
+        }).when(ExempleServiceForMock.class, "getSqlDataStatic", Mockito.any(), Mockito.any());
 
-        powerMockClass.methodHandlerStatic("idSqlData").onSuccess(event -> {
+        exempleClassForMock.methodHandlerStatic("idSqlData").onSuccess(event -> {
             ctx.assertTrue(event.equals("myCustomData"));
             async.complete();
         });

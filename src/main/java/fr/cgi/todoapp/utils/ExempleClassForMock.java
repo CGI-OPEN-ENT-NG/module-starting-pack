@@ -4,9 +4,9 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 
-public class PowerMockClass {
+public class ExempleClassForMock {
     static private String staticPrivateField = "1";
-    private PowerMockService powerMockService = new PowerMockService();
+    private ExempleServiceForMock exempleServiceForMock = new ExempleServiceForMock();
 
     static public String staticMethod() {
         return "1";
@@ -30,7 +30,7 @@ public class PowerMockClass {
 
     public String callService(JsonObject jsonObject) {
         assert jsonObject.getString("string1") != null;
-        return powerMockService.service(jsonObject.getString("string1"));
+        return exempleServiceForMock.service(jsonObject.getString("string1"));
     }
 
     //Get data from id
@@ -38,7 +38,7 @@ public class PowerMockClass {
         Promise<String> promise = Promise.promise();
 
         //Call the Sql service to retrieve the data
-        powerMockService.getSqlData(id, event -> {
+        exempleServiceForMock.getSqlData(id, event -> {
             //We assume that the service is functional and that it necessarily returns a JsonObject with this structure {"data": String}
             //We want to test the processing done in the handler
             promise.complete(event.right().getValue().getString("data"));
@@ -51,7 +51,7 @@ public class PowerMockClass {
         Promise<String> promise = Promise.promise();
 
         //Call the Sql service to retrieve the data
-        PowerMockService.getSqlDataStatic(id, event -> {
+        ExempleServiceForMock.getSqlDataStatic(id, event -> {
             //We assume that the service is functional and that it necessarily returns a JsonObject with this structure {"data": String}
             //We want to test the processing done in the handler
             promise.complete(event.right().getValue().getString("data"));
