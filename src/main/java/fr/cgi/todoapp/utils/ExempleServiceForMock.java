@@ -4,7 +4,7 @@ import fr.wseduc.webutils.Either;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 
-public class PowerMockService {
+public class ExempleServiceForMock {
     public String service(String s) {
         //We don't want to test the service
         assert false;
