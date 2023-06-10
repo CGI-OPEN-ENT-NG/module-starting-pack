@@ -14,7 +14,9 @@ describe('todoDetentionForm', () => {
         const testApp = angular.module('app', []);
 
         //Mockup test module
-        angular.mock.module('app');
+        // angular.mock.module('app');
+        // adding 'default' for this version
+        angular['default'].mock.module('app');
 
         //Instantiation of the services, controllers, directives we need
         todoDirective;
