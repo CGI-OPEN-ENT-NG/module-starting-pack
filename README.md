@@ -13,8 +13,8 @@ This project includes :
 
 
 What must be updated :
-- `entcore` (from package.json) current: `3.12.0`
-- `entCoreVersion` (from gradle.properties) current : `3.12.0`
+- `entcore` (from package.json) current: `4.7.2`
+- `entCoreVersion` (from gradle.properties) current : `4.10.2`
 
 What must be changed (if you wish) :
 - module name we use `module-starting-pack` as name folder
