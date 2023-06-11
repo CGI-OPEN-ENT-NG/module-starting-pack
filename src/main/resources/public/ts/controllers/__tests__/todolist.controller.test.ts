@@ -15,7 +15,7 @@ describe('TodolistController', () => {
         // angular.mock.module('app');
         // adding 'default' for this version
 
-        angular['default'].mock.module('app');
+        angular.mock.module('app');
 
 
         //Instantiation of the services, controllers, directives we need
@@ -27,7 +27,7 @@ describe('TodolistController', () => {
         //Controller Injection
         // adding 'default' for this version
 
-        angular['default'].mock.inject((_$controller_, _$rootScope_) => {
+        angular.mock.inject((_$controller_, _$rootScope_) => {
             // The injector unwraps the underscores (_) from around the parameter names when matching
             $controller = _$controller_;
             $rootScope = _$rootScope_;

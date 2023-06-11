@@ -30,3 +30,5 @@ module-starting-pack/src/main/resources/public/font
 /src/main/resources/public/js/
 /src/main/resources/view/
 /package-lock.json
+/src/main/resources/public/css/
+/yarn.lock
